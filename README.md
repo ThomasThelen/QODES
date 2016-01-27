@@ -12,9 +12,12 @@ Format is Algorithm : Class Name
 
 Runge Kutta 4 : RK4
 
-Runge Kutts 3/8 : RK38
+Runge Kutta 3/8 : RK38
+
+Runge–Kutta–Fehlberg : RK45
 
 Forward Euler : ForwardEuler
+
 
 
 ## Usage
