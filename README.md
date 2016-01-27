@@ -1,4 +1,4 @@
-# QODES
+﻿# QODES
 Quick Ordinary Differential Equation Solver (QODES) is an ODE solving library with a focus on usability and ease.
 
 
@@ -20,10 +20,16 @@ Forward Euler : ForwardEuler
 
 
 
+
+## Compiling
+To compile the project, include the QUODE.hpp header file in your main document.
+
+
 ## Usage
 
-First, create a new interface to the desired algorithm, shown below. During the creation, the step size, final x value, and initial condition are supplied.
-  ```c++
+The library works by interfacing the Algorithm base class. See the code below for an example. The constructor takes the step size, final x value, and initial condition. For adaptive methods, supply the initial step size and subsequent sizes will be automatically computed.
+ 
+ ```c++
 Algorithm *RK = new RK38(0.10, 10, 2);
 ```
   where
@@ -42,7 +48,7 @@ Algorithm *RK = new RK38(0.10, 10, 2);
 	return result;
 }
 ```
-The next step is to point the Eqn.differential_equation to the appropriate location.
+The next step is to point the Eqn.differential_equation to the appropriate location. This is done for every solution method.
   ```c++
   RK->Eqn.differential_equation = MyFunction;
 ```
