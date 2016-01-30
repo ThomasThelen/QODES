@@ -1,0 +1,28 @@
+﻿  Dev.cpp
+c:\users\central\documents\github\qodes\qode.hpp(86): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  c:\users\central\documents\github\qodes\qode.hpp(80): note: while compiling class template member function 'double RK38<double>::Solve(void)'
+  c:\users\central\documents\github\qodes\dev\dev\dev.cpp(10): note: see reference to class template instantiation 'RK38<double>' being compiled
+c:\users\central\documents\github\qodes\qode.hpp(87): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(88): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(89): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(90): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(219): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+  c:\users\central\documents\github\qodes\qode.hpp(213): note: while compiling class template member function 'double RK45<double>::Solve(void)'
+  c:\users\central\documents\github\qodes\dev\dev\dev.cpp(26): note: see reference to class template instantiation 'RK45<double>' being compiled
+c:\users\central\documents\github\qodes\qode.hpp(220): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(221): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(222): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(223): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(224): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(225): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(297): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+  c:\users\central\documents\github\qodes\qode.hpp(291): note: while compiling class template member function 'double RKDP<double>::Solve(void)'
+  c:\users\central\documents\github\qodes\dev\dev\dev.cpp(32): note: see reference to class template instantiation 'RKDP<double>' being compiled
+c:\users\central\documents\github\qodes\qode.hpp(298): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(299): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(300): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(301): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(302): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(303): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qode.hpp(304): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+  Dev.vcxproj -> C:\Users\Central\Documents\GitHub\QODES\Dev\Debug\Dev.exe
