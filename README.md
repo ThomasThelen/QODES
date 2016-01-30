@@ -16,6 +16,8 @@ Runge Kutta 3/8 : RK38
 
 Runge–Kutta–Fehlberg : RK45
 
+Runge-Kutta-Dormand-Prince : RKDP
+
 Forward Euler : ForwardEuler
 
 
