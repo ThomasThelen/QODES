@@ -38,6 +38,20 @@ protected:
 	T initial_condition;
 };
 
+template <class T>
+class RungeKutta : public Algorithm<T>
+{
+public:
+	T k1, k2, k3, k4;
+};
+
+template <class T>
+class Adaptive : public RungeKutta<T>
+{
+	virtual void CalculateStepSize(T, T)=0;
+};
+
+
 template<class T>
 void Algorithm<T>::FillX()
 {
@@ -49,15 +63,12 @@ void Algorithm<T>::FillX()
 
 // Definitions for the RK 3/8 method
 template <class T>
-class RK38 : public Algorithm<T>
+class RK38 : public RungeKutta<T>
 {
 public:
 	RK38(T step, T final_x, T IC);
 	T Solve();
 	void SetIC();
-private:
-
-	T k1, k2, k3, k4;
 };
 
 template <class T>
@@ -96,15 +107,12 @@ T RK38<T>::Solve()
 
 // Definitions for the Class RK Method
 template <class T>
-class RK4 : public Algorithm<T>
+class RK4 : public RungeKutta<T>
 {
 public:
 	RK4(T a, T b, T c);
-
 	T Solve();
 	void SetIC();
-protected:
-	T k1, k2, k3, k4;
 };
 
 template <class T>
@@ -144,13 +152,12 @@ T RK4<T>::Solve()
 
 // Definitions for the forward Euler Methods
 template <class T>
-class ForwardEuler : public Algorithm<T>
+class ForwardEuler : public RungeKutta<T>
 {
 public:
 	ForwardEuler(T, T, T);
 	T Solve();
 	void SetIC();
-private:
 
 };
 
@@ -186,15 +193,15 @@ T ForwardEuler<T>::Solve()
 
 // Runge–Kutta–Fehlberg 
 template <class T>
-class RK45 : public Algorithm<T>
+class RK45 : public Adaptive<T>
 {
 public:
 	RK45(T step, T final_x, T IC);
 	T Solve();
 	void SetIC();
-private:
+protected:
 	void CalculateStepSize(T, T);
-	T k1, k2, k3, k4, k5, k6;
+	T k5, k6;
 	bool flag;
 };
 
@@ -259,20 +266,17 @@ void RK45<T>::SetIC()
 	cout << "Garbage" << endl;
 }
 
-
-
-
 // Runge Kutta Dormand Prince Definitions
 template< class T>
-class RKDP : public Algorithm<T>
+class RKDP : public Adaptive<T>
 {
 public:
 	RKDP(T step, T final_x, T IC);
 	T Solve();
 	void SetIC();
-private:
+protected:
 	void CalculateStepSize(T, T);
-	T k1, k2, k3, k4, k5, k6, k7;
+	T k5, k6, k7;
 	bool flag;
 };
 
@@ -341,20 +345,7 @@ void RKDP<T>::SetIC()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Backburner
-// Make a new derived Algorithm derived class to provide an interface for adaptive methods
-// -> virtual float CalculateStepSize()=0 
 // Look at moving most of derived class constructors to Equation constructor
 // Get rid of SetIC()
 // ....And FillX()
@@ -366,15 +357,6 @@ Sources
 http://depa.fquim.unam.mx/amyd/archivero/DormandPrince_19856.pdf
 
 http://www.mymathlib.com/diffeq/runge-kutta/runge_kutta_3_8.html
-
-
-
-
 */
 
 
-template <class T>
-T MyFunction(T x, T y)
-{
-	return x;
-}
