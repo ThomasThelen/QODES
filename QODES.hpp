@@ -3,11 +3,12 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <thread>
 
 using std::vector;
 using std::cout;
 using std::endl;
-
+using std::thread;
 
 // Abstract Base Class -> Is the interface for all solution methods ie all solution classes are derived from Algorithm
 template <class T>
@@ -51,14 +52,14 @@ class Adaptive : public RungeKutta<T>
 	virtual void CalculateStepSize(T, T)=0;
 };
 
-
 template<class T>
 void Algorithm<T>::FillX()
 {
-	for (T i = 0; i <= this->target_x; i += this->step_size)
+	for (double i = 0; i <= this->target_x; i += this->step_size)
 	{
 		this->Eqn.x.push_back(i);
 	}
+	this->Eqn.x.push_back(this->target_x);
 }
 
 // Definitions for the RK 3/8 method
@@ -187,6 +188,8 @@ T ForwardEuler<T>::Solve()
 		this->Eqn.y.push_back(this->Eqn.y.back() + step_size*Eqn.differential_equation(this->Eqn.x.back(),this->Eqn.y.back()));
 		cout << "X: " << this->Eqn.x.back() << "    " << "Y: " << this->Eqn.y.back() << endl;
 	}
+	this->Eqn.x.push_back(target_x);
+	this->Eqn.y.push_back(this->Eqn.y.back() + step_size*Eqn.differential_equation(this->Eqn.x.back(), this->Eqn.y.back()));
 	return 0;
 }
 
@@ -198,7 +201,9 @@ class RK45 : public Adaptive<T>
 public:
 	RK45(T step, T final_x, T IC);
 	T Solve();
+	void ComputeDerivative(int, T&);
 	void SetIC();
+
 protected:
 	void CalculateStepSize(T, T);
 	T k5, k6;
@@ -215,22 +220,30 @@ RK45<T>::RK45(T step, T final_x, T IC)
 	this->Eqn.x.push_back(0);
 };
 
+
+template <class T>
+void RK45<T>::ComputeDerivative(int position, T& temp_y)
+{
+	k1 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1), this->Eqn.y.at(position - 1));
+	k2 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + (this->step_size / 4), this->Eqn.y.at(position - 1) + (k1 / 4.0));
+	k3 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + 3.0*(this->step_size / 8.0), this->Eqn.y.at(position - 1) + (3.0*k1 / 32.0) + k2*(9.0 / 32.0));
+	k4 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + this->step_size, this->Eqn.y.at(position - 1) + (1932.0 / 2197.0)*k1 - (7200 / 2197)*k2 + (7296 / 2197)*k3);
+	k5 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + this->step_size, this->Eqn.y.at(position - 1) + (439 / 216)*k1 - (8.0*k2) + (3680.0 / 513.0)*k3 - (845 / 4104)*k4);
+	k6 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + 0.5*this->step_size, this->Eqn.y.at(position - 1) - (8.0 / 27)*k1 + 2.0*k2 - (3544 / 2565)*k3 + (1859 / 4104)*k4 - (11.0 / 40.0)*k5);
+	temp_y = this->Eqn.y.at(position - 1) + (16.0 / 135.0)*k1 + (6656.0 / 12825.0)*k3 + (28561.0 / 56430.0)*k4 - (9.0 / 50.0)*k5 + (2.0 / 55.0)*k6;
+
+
+	cout << "X: " << this->Eqn.x.back() << "    " << "Y: " << this->Eqn.y.back() << endl;
+}
+
 template <class T>
 T RK45<T>::Solve()
 {
 	T temp_y, temp_x = 0;
 	T position = 1;
-	for (double i = 1; this->Eqn.x.back()<= this->target_x+step_size; ++i)
+	for (double i = 1; this->Eqn.x.back()< this->target_x+step_size; ++i)
 	{
-
-		k1 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1), this->Eqn.y.at(position - 1));
-		k2 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + (this->step_size / 4), this->Eqn.y.at(position - 1) + (k1 / 4.0));
-		k3 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + 3.0*(this->step_size / 8.0), this->Eqn.y.at(position - 1) + (3.0*k1 / 32.0) + k2*(9.0 / 32.0));
-		k4 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + this->step_size, this->Eqn.y.at(position - 1) + (1932.0 / 2197.0)*k1 - (7200 / 2197)*k2 + (7296 / 2197)*k3);
-		k5 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + this->step_size, this->Eqn.y.at(position - 1) + (439 / 216)*k1 - (8.0*k2) + (3680.0 / 513.0)*k3 - (845 / 4104)*k4);
-		k6 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + 0.5*this->step_size, this->Eqn.y.at(position - 1) - (8.0 / 27)*k1 + 2.0*k2 - (3544 / 2565)*k3 + (1859 / 4104)*k4 - (11.0 / 40.0)*k5);
-		temp_y = this->Eqn.y.at(position - 1) + (16.0 / 135.0)*k1 + (6656.0 / 12825.0)*k3 + (28561.0 / 56430.0)*k4 - (9.0 / 50.0)*k5 + (2.0 / 55.0)*k6;
-		cout << "X: " << this->Eqn.x.back() << "    " << "Y: " << this->Eqn.y.back() << endl;
+		ComputeDerivative(position, temp_y);
 
 		if (flag == false)
 		{
@@ -247,6 +260,8 @@ T RK45<T>::Solve()
 			position++;
 		}
 	}
+	this->Eqn.x.push_back(target_x);
+	ComputeDerivative(position, temp_y);
 	return 0;
 }
 
@@ -255,8 +270,8 @@ void RK45<T>::CalculateStepSize(T t_y, T t_x)
 {
 	T s;
 	s = 0.84*pow(step_size / (2.0 * abs((t_x - t_y))), 0.25);
-	if (s*this->Eqn.x.back() < 1)
-		step_size = s*t_x;
+	if (s+this->Eqn.x.back() > target_x)
+		step_size = s*0.001;
 	flag = 1;
 }
 
@@ -333,8 +348,13 @@ void RKDP<T>::CalculateStepSize(T t_y, T t_x)
 	temp = t_y + (5179.0 / 57600.0)*k1 + (7571.0 / 16695.0)*k3 + (393.0 / 640.0)*k4 - (92097.0 / 39200.0)*k5 + (1.0 / 40.0)*k7;
 	s = pow(step_size / (2.0 * abs((t_x - t_y))),1.0/5.0);
 	if ((s*this->Eqn.x.back() < 1.0) && (s*step_size > 0.001))
+	{
 		step_size = s*step_size;
-
+	}
+	if (step_size + this->Eqn.x.back() >= target_x)
+	{
+		step_size = step_size*.10;
+	}
 	flag = 1;
 }
 
@@ -344,13 +364,23 @@ void RKDP<T>::SetIC()
 	cout << "Garbage check backburner" << endl;
 }
 
+/*
+
+template<class T>
+void SimulSolve(Algorithm<T> &algo1, Algorithm<T> &algo2)
+{
+	std::thread solver1(&Algorithm<double>::Solve, algo1);
+	std::thread solver2(&Algorithm<double>::Solve, algo2);
+	solver1.join();
+	solver2.join();
+}
+*/
+
 
 // Backburner
 // Look at moving most of derived class constructors to Equation constructor
 // Get rid of SetIC()
 // ....And FillX()
-// PUT TARGET_X IN X????!!!
-
 /*
 Sources
 

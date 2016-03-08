@@ -1,28 +1,23 @@
 ﻿  Dev.cpp
-c:\users\central\documents\github\qodes\qodes.hpp(97): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-  c:\users\central\documents\github\qodes\qodes.hpp(91): note: while compiling class template member function 'double RK38<double>::Solve(void)'
-  c:\users\central\documents\github\qodes\dev\dev\dev.cpp(14): note: see reference to class template instantiation 'RK38<double>' being compiled
 c:\users\central\documents\github\qodes\qodes.hpp(98): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  c:\users\central\documents\github\qodes\qodes.hpp(92): note: while compiling class template member function 'double RK38<double>::Solve(void)'
+  c:\users\central\documents\github\qodes\dev\dev\dev.cpp(14): note: see reference to class template instantiation 'RK38<double>' being compiled
 c:\users\central\documents\github\qodes\qodes.hpp(99): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
 c:\users\central\documents\github\qodes\qodes.hpp(100): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
 c:\users\central\documents\github\qodes\qodes.hpp(101): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(226): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-  c:\users\central\documents\github\qodes\qodes.hpp(220): note: while compiling class template member function 'double RK45<double>::Solve(void)'
+c:\users\central\documents\github\qodes\qodes.hpp(102): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(246): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  c:\users\central\documents\github\qodes\qodes.hpp(241): note: while compiling class template member function 'double RK45<double>::Solve(void)'
   c:\users\central\documents\github\qodes\dev\dev\dev.cpp(30): note: see reference to class template instantiation 'RK45<double>' being compiled
-c:\users\central\documents\github\qodes\qodes.hpp(227): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(228): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(229): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(230): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(231): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(232): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(301): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-  c:\users\central\documents\github\qodes\qodes.hpp(295): note: while compiling class template member function 'double RKDP<double>::Solve(void)'
+c:\users\central\documents\github\qodes\qodes.hpp(264): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(316): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+  c:\users\central\documents\github\qodes\qodes.hpp(310): note: while compiling class template member function 'double RKDP<double>::Solve(void)'
   c:\users\central\documents\github\qodes\dev\dev\dev.cpp(36): note: see reference to class template instantiation 'RKDP<double>' being compiled
-c:\users\central\documents\github\qodes\qodes.hpp(302): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(303): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(304): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(305): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(306): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(307): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-c:\users\central\documents\github\qodes\qodes.hpp(308): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(317): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(318): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(319): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(320): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(321): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(322): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+c:\users\central\documents\github\qodes\qodes.hpp(323): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
   Dev.vcxproj -> C:\Users\Central\Documents\GitHub\QODES\Dev\Debug\Dev.exe

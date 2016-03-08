@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "QODE.hpp"
-double MyFunction(double x, double y);
+
+
+// dx/dy=x*y
+template<class T>
+TMyFunction(T x, T y)
+{
+	return x*y
+}
 
 
 int main()
@@ -36,8 +43,3 @@ int main()
 }
 
 
-double MyFunction(double x, double y)
-{
-	double result = x;
-	return result;
-}
