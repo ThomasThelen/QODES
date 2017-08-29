@@ -2,15 +2,11 @@
 Quick Ordinary Differential Equation Solver (QODES) is an ODE solving library with a focus on usability and ease.
 
 
-##Structure
+## Structure
 
-Solver - A type of numerical method ie Rune Kutta 545
+Solver - A type of numerical method. ie Rune Kutta 545
 
 Each solver is a derived class from the abstract Algorithm class. Each solver is initialized with the step size, target x, and the initial condition.
-
-
-<UML Diagram Here>
-
 
 ## Supported Algorithms
 
@@ -36,7 +32,7 @@ To compile the project, include the QUODES.hpp header file in your main document
 The library works by interfacing the Algorithm base class. See the code below for an example. The constructor takes the step size, final x value, and initial condition. For adaptive methods, supply the initial step size and subsequent sizes will be automatically computed.
  
  ```c++
-Algorithm<double> *RK = new RK38<double.(0.10, 10, 2);
+auto RK = std::make_shared<Algorithm<double>> RK38<double>(0.10, 10, 2);
 ```
   where
   
@@ -48,7 +44,7 @@ Algorithm<double> *RK = new RK38<double.(0.10, 10, 2);
   
   Once the algorithm is created, the ordinary differential equation must be configured. The ODE is represented by a function with a double return type. 
   ```c++
-  template <clas T>
+  template <class T>
   T MyFunction(T x, T y)
 {
 	T result = x + y;
@@ -66,7 +62,7 @@ The next step is to point the Eqn.differential_equation to the appropriate locat
 ```
     
     
-##Example main.cpp
+## Example main.cpp
 This example solves the following differential equation at x=10 with a step of 0.5 and initial condition y(0)=1.
     
 
