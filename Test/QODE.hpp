@@ -52,7 +52,6 @@ public:
 	float Solve();
 	void SetIC();
 private:
-
 	double k1, k2, k3, k4;
 };
 
@@ -133,7 +132,6 @@ public:
 	float Solve();
 	void SetIC();
 private:
-
 };
 ForwardEuler::ForwardEuler(float step, float final_x, float IC)
 {
@@ -159,8 +157,7 @@ float ForwardEuler::Solve()
 	return 0;
 }
 
-
-// Runge–Kutta–Fehlberg 
+// Rungeâ€“Kuttaâ€“Fehlberg 
 class RK45 : public Algorithm
 {
 public:
@@ -186,7 +183,6 @@ float RK45::Solve()
 	double position = 1;
 	for (double i = 1; this->Eqn.x.back()<= this->target_x+step_size; ++i)
 	{
-
 		k1 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1), this->Eqn.y.at(position - 1));
 		k2 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + (this->step_size / 4), this->Eqn.y.at(position - 1) + (k1 / 4.0));
 		k3 = this->step_size*this->Eqn.differential_equation(this->Eqn.x.at(position - 1) + 3.0*(this->step_size / 8.0), this->Eqn.y.at(position - 1) + (3.0*k1 / 32.0) + k2*(9.0 / 32.0));
