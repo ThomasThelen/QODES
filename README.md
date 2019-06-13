@@ -1,3 +1,8 @@
+![alt text](https://github.com/ThomasThelen/QODES/raw/master/qodes.png)
+
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)  [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+
+
 # QODES
 Quick Ordinary Differential Equation Solver (QODES) is an ODE solving library with a focus on usability and ease.
 
@@ -9,6 +14,8 @@ Solver - A type of numerical method. ie Rune Kutta 545
 Each solver is a derived class from the abstract Algorithm class. Each solver is initialized with the step size, target x, and the initial condition.
 
 ## Supported Algorithms
+
+I probably used some of the algorithms in [this](https://github.com/ThomasThelen/Runge-Kutta) repository.
 
 Format is Algorithm : Class Name
 
@@ -76,6 +83,7 @@ int main()
 	Algorithm *ClassicRK = new RK4(0.50, 10, 1);
 	ClassicRK->Eqn.differential_equation = MyFunction;
 	ClassicRK->Solve();
+	delete ClassicRK;
 	return 0;
 }
 
