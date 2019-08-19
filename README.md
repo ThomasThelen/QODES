@@ -13,6 +13,8 @@ Solver - A type of numerical method. ie Rune Kutta 545
 
 Each solver is a derived class from the abstract Algorithm class. Each solver is initialized with the step size, target x, and the initial condition.
 
+The source can be found in `QODES/src/`
+
 ## Supported Algorithms
 
 I probably used some of the algorithms in [this](https://github.com/ThomasThelen/Runge-Kutta) repository.
