@@ -1,8 +1,7 @@
 ![alt text](https://github.com/ThomasThelen/QODES/raw/master/qodes.png)
 
 [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)  [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
-
-
+[![CodeFactor](https://www.codefactor.io/repository/github/thomasthelen/qodes/badge)](https://www.codefactor.io/repository/github/thomasthelen/qodes)
 # QODES
 Quick Ordinary Differential Equation Solver (QODES) is an ODE solving library with a focus on usability and ease.
 
