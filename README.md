@@ -5,6 +5,8 @@
 # QODES
 Quick Ordinary Differential Equation Solver (QODES) is an ODE solving library with a focus on usability and ease.
 
+Like many other STEM folks, I played around with creating various ODE/PDE solving algorithms. By the time I was done, I figured that I might as well throw them into an easy-to-use format in case anyone
+down the line wanted to see how to impliment these various algorithms. There are of course much more complete and robust libraries out there (like ODIENT) that should be used for any sort of real work.
 
 ## Structure
 
@@ -81,10 +83,9 @@ This example solves the following differential equation at x=10 with a step of 0
 int main()
 {
 	std::cout<< "RK4" << std::endl;
-	Algorithm *ClassicRK = new RK4(0.50, 10, 1);
-	ClassicRK->Eqn.differential_equation = MyFunction;
-	ClassicRK->Solve();
-	delete ClassicRK;
+	Algorithm ClassicRK = RK4(0.50, 10, 1);
+	ClassicRK.Eqn.differential_equation = MyFunction;
+	ClassicRK.Solve();
 	return 0;
 }
 
