@@ -5,7 +5,7 @@
 template <class T>
 T MyFunction(T x, T y)
 {
-	// function of y=x
+	// function of dy/dx=x
 	return (x);
 }
 int main()

@@ -3,12 +3,10 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
-#include <thread>
 
 using std::vector;
 using std::cout;
 using std::endl;
-using std::thread;
 
 // Abstract Base Class -> Is the interface for all solution methods ie all solution classes are derived from Algorithm
 template <class T>
@@ -24,7 +22,7 @@ public:
 	virtual void SetIC() = 0;
 	void FillX();
 
-	class Equation // Holds Equation-Based Data
+	class Equation // Represents an equation. It contains the function iteself, its initial conditions and all the values
 	{
 	public:
 		int dimensions;
@@ -363,14 +361,3 @@ void RKDP<T>::SetIC()
 {
 	cout << "Garbage check backburner" << endl;
 }
-
-
-/*
-Sources
-
-http://depa.fquim.unam.mx/amyd/archivero/DormandPrince_19856.pdf
-
-http://www.mymathlib.com/diffeq/runge-kutta/runge_kutta_3_8.html
-*/
-
-

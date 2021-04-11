@@ -2,57 +2,32 @@
 
 [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)  [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 [![CodeFactor](https://www.codefactor.io/repository/github/thomasthelen/qodes/badge)](https://www.codefactor.io/repository/github/thomasthelen/qodes)
+
 # QODES
-Quick Ordinary Differential Equation Solver (QODES) is an ODE solving library with a focus on usability and ease.
+Quick Ordinary Differential Equation Solver (QODES) is a header-only ODE solving library with a focus on end user usability. The library supports a small, but standard set of numerical 
+methods for solving ODEs. These include the Forward Euler method and the Rune Kutta class.
 
-Like many other STEM folks, I played around with creating various ODE/PDE solving algorithms. By the time I was done, I figured that I might as well throw them into an easy-to-use format in case anyone
-down the line wanted to see how to impliment these various algorithms. There are of course much more complete and robust libraries out there (like ODIENT) that should be used for any sort of real work.
+Note that there are much more robust libraries out there like Odient; this was largely a project that I had worked on for fun.
 
-## Structure
+# Quick Start
+To use this, download `QODES.h` and include it in your C++ project. A list of classes are provided below that represent the different solution algorithms.
 
-Solver - A type of numerical method. ie Rune Kutta 545
-
-Each solver is a derived class from the abstract Algorithm class. Each solver is initialized with the step size, target x, and the initial condition.
-
-The source can be found in `QODES/src/`
-
-## Supported Algorithms
-
-I probably used some of the algorithms in [this](https://github.com/ThomasThelen/Runge-Kutta) repository.
-
-Format is Algorithm : Class Name
-
-Runge Kutta 4 : RK4
-
-Runge Kutta 3/8 : RK38
-
-Runge–Kutta–Fehlberg : RK45
-
-Runge-Kutta-Dormand-Prince
-
-Forward Euler : ForwardEuler
-
-
-## Compiling
-To compile the project, include the QUODES.hpp header file in your main document.
-
-
-## Usage
-
-The library works by interfacing the Algorithm base class. See the code below for an example. The constructor takes the step size, final x value, and initial condition. For adaptive methods, supply the initial step size and subsequent sizes will be automatically computed.
- 
- ```c++
-auto RK = std::make_shared<Algorithm<double>> RK38<double>(0.10, 10, 2);
 ```
-  where
-  
-  0.10 is the step size
-  
-  10 is the final x
-  
-  2 is the initial condition
-  
-  Once the algorithm is created, the ordinary differential equation must be configured. The ODE is represented by a function with a double return type. 
+Runge Kutta 4 : RK4
+Runge Kutta 3/8 : RK38
+Runge–Kutta–Fehlberg : RK45
+Runge-Kutta-Dormand-Prince: RKDP
+Forward Euler : ForwardEuler
+```
+
+The constructor of these classes takes the step size, the target x value in question, and an initial condition. For adaptive methods, supply the initial step size and subsequent sizes will be automatically computed.
+
+The general form of creating an algorithm follows, where 0.10 is the step size, 10 is the x value that we want the slope at, and 2 is the initial condition `y(0)=2`. In this case, the Runge Kutta 3/8 method is chosen.
+ ```c++
+auto RK = std::make_shared<RK38<double>> RK38<double>(0.10, 10, 2);
+```
+
+ Once the algorithm is created, the differential should be created. The following is a good template to use; note that `y` is _not_ neccessary in the ODE but should still be a function parameter.
   ```c++
   template <class T>
   T MyFunction(T x, T y)
@@ -61,28 +36,23 @@ auto RK = std::make_shared<Algorithm<double>> RK38<double>(0.10, 10, 2);
 	return result;
 }
 ```
-The next step is to point the Eqn.differential_equation to the appropriate location. This is done for every solution method.
+The final steps are to set the Eqn.differential_equation to the ODE from above and call the `Solve()` method on the solver.
   ```c++
   RK->Eqn.differential_equation = MyFunction;
 ```
-  
-  The final step is to initiate the Solve() method. This will solve the ODE pointed to by Eqn.differential equation in conjunction with the parameters in the constructor.
   ```c++
   RK->Solve();
 ```
-    
-    
-## Example main.cpp
-This example solves the following differential equation at x=10 with a step of 0.5 and initial condition y(0)=1.
-    
 
+## Example main.cpp
+This example solves a basic differential equation at x=10 with a step of 0.5 and initial condition y(0)=1.
   ```c++
 #include "stdafx.h"
 #include "QODE.hpp"
 
 int main()
 {
-	std::cout<< "RK4" << std::endl;
+	std::cout<< "Solving dy/dx=x with the RK4 method..." << std::endl;
 	Algorithm ClassicRK = RK4(0.50, 10, 1);
 	ClassicRK.Eqn.differential_equation = MyFunction;
 	ClassicRK.Solve();
@@ -95,7 +65,9 @@ T MyFunction(T x, T y)
 	T result = x;
 	return result;
 }
+```
+  
+# Sources
+http://depa.fquim.unam.mx/amyd/archivero/DormandPrince_19856.pdf
 
-    ```
-  
-  
+http://www.mymathlib.com/diffeq/runge-kutta/runge_kutta_3_8.html
