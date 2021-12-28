@@ -89,7 +89,7 @@ T RK38<T>::Solve()
 {
 	SetIC();
 
-	for (float i = 1; m_equation.x.back()<m_target_x; ++i) {
+	for (int i = 1; m_equation.x.back()<m_target_x; ++i) {
 		m_equation.x.push_back(m_equation.x.back() + m_step_size);
 		k1 = m_step_size*m_equation.differential_equation(m_equation.x.at(i - 1), m_equation.y.at(i - 1));
 		k2 = m_step_size*m_equation.differential_equation(m_equation.x.at(i - 1) + (m_step_size/ 3.0), m_equation.y.at(i - 1) + (k1 / 3.0));
@@ -218,11 +218,8 @@ RK45<T>::RK45(T step, T final_x, T IC)
 template <class T>
 void RK45<T>::ComputeDerivative(int position, T& temp_y)
 {
-	cout << "as";
 	k1 = m_step_size*m_equation.differential_equation(m_equation.x.at(position - 1), m_equation.y.at(position - 1));
-	cout << "1" << endl;
 	k2 = m_step_size*m_equation.differential_equation(m_equation.x.at(position - 1) + (m_step_size/ 4), m_equation.y.at(position - 1) + (k1 / 4.0));
-	cout << "2" << endl;
 	k3 = m_step_size*m_equation.differential_equation(m_equation.x.at(position - 1) + 3.0*(m_step_size/ 8.0), m_equation.y.at(position - 1) + (3.0*k1 / 32.0) + k2*(9.0 / 32.0));
 	k4 = m_step_size*m_equation.differential_equation(m_equation.x.at(position - 1) + m_step_size, m_equation.y.at(position - 1) + (1932.0 / 2197.0)*k1 - (7200 / 2197)*k2 + (7296 / 2197)*k3);
 	k5 = m_step_size*m_equation.differential_equation(m_equation.x.at(position - 1) + m_step_size, m_equation.y.at(position - 1) + (439 / 216)*k1 - (8.0*k2) + (3680.0 / 513.0)*k3 - (845 / 4104)*k4);
@@ -237,11 +234,9 @@ template <class T>
 T RK45<T>::Solve()
 {
 	T temp_y, temp_x = 0;
-	T position = 1;
+	int position = 1;
 	for (double i = 1; m_equation.x.back()< m_target_x+m_step_size; ++i) {
-		cout << "Computing Derivative";
 		ComputeDerivative(position, temp_y);
-		cout << "Done";
 		if (flag == false) {
 			temp_x += m_step_size;
 			m_equation.x.push_back(temp_x);
@@ -303,7 +298,7 @@ template <class T>
 T RKDP<T>::Solve()
 {
 	T temp_y, temp_x = 0;
-	T position = 1;
+	int position = 1;
 	for (double i = 1; m_equation.x.back()<= m_target_x+m_step_size; ++i) {
 		k1 = m_step_size*m_equation.differential_equation(m_equation.x.at(position - 1), m_equation.y.at(position - 1));
 		k2 = m_step_size*m_equation.differential_equation(m_equation.x.at(position - 1) + (m_step_size/ 5.0), m_equation.y.at(position - 1) +k1/5.0);
@@ -348,5 +343,5 @@ void RKDP<T>::CalculateStepSize(T t_y, T t_x)
 template <class T>
 void RKDP<T>::SetIC()
 {
-	cout << "Unused" << endl;
+	return;
 }
