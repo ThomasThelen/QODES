@@ -7,8 +7,14 @@
 Quick Ordinary Differential Equation Solver (QODES) is a header-only ODE solving library with a focus on end user usability. The library supports a small, but standard set of numerical 
 methods for solving ODEs. These include the Forward Euler method and the Rune Kutta class.
 
-Note that there are much more robust libraries out there like Odient; this was largely a project that I had worked on for fun.
+Note that there are much more robust libraries out there like Odient; this was largely a project that I had worked on for fun and can be used for reference.
+# Building
+To build the example, run the following from inside the `build/` directory,
 
+```
+cmake ..
+cmake --build .
+```
 # Quick Start
 To use this, download `QODES.h` and include it in your C++ project. A list of classes are provided below that represent the different solution algorithms.
 
