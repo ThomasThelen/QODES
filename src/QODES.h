@@ -1,6 +1,8 @@
 #pragma once
 
+#include <concepts>
 #include <iostream>
+#include <numeric>
 #include <vector>
 #include <math.h>
 
@@ -8,19 +10,24 @@ using std::vector;
 using std::cout;
 using std::endl;
 
+template<typename T>
+concept Number = requires (T a) {
+	std::is_integral_v<T> || std::is_floating_point_v<T>;
+};
+
 // Abstract base class that all solution methods inherit from
-template <class T>
+template <Number T>
 class Algorithm
 {
 public:
-	virtual T Solve() = 0; // Main Algorithm
+	virtual T Solve() = 0; // Workhorse method for solving the equation
 	Algorithm() {
-		m_step_size = 0;
-		m_target_x = 0;
+		m_step_size = 0; // Algorithm step size
+		m_target_x = 0; // The independant variable whose y value is being solved for
 	};
 	void FillX();
 
-	class Equation // Represents an equation. It contains the function iteself, its initial conditions and all the values
+	class Equation // Represents an equation. It contains the function iteself, its initial conditions and a history of computed values
 	{
 	public:
 		int dimensions;
@@ -35,14 +42,14 @@ protected:
 	T m_initial_condition;
 };
 
-template <class T>
+template <Number T>
 class RungeKutta : public Algorithm<T>
 {
 public:
 	T k1, k2, k3, k4;
 };
 
-template<class T>
+template<Number T>
 void Algorithm<T>::FillX()
 {
 	for (double i = 0; i <= m_target_x; i += m_step_size)
@@ -53,7 +60,7 @@ void Algorithm<T>::FillX()
 }
 
 // Definitions for the RK 3/8 method
-template <class T>
+template <Number T>
 class RK38 : public RungeKutta<T>
 {
 public:
@@ -61,7 +68,7 @@ public:
 	T Solve();
 };
 
-template <class T>
+template <Number T>
 RK38<T>::RK38(T step, T final_x, T IC)
 {
 	m_step_size = step;
@@ -69,7 +76,7 @@ RK38<T>::RK38(T step, T final_x, T IC)
 	m_initial_condition = IC;
 };
 
-template <class T>
+template <Number T>
 T RK38<T>::Solve()
 {
 	m_equation.x.push_back(0);
@@ -88,7 +95,7 @@ T RK38<T>::Solve()
 }
 
 // Definitions for the Class RK Method
-template <class T>
+template <Number T>
 class RK4 : public RungeKutta<T>
 {
 public:
@@ -96,7 +103,7 @@ public:
 	T Solve();
 };
 
-template <class T>
+template <Number T>
 RK4<T>::RK4(T step, T final_x, T IC)
 {
 	m_step_size = step;
@@ -104,7 +111,7 @@ RK4<T>::RK4(T step, T final_x, T IC)
 	m_initial_condition = IC;
 }
 
-template <class T>
+template <Number T>
 T RK4<T>::Solve()
 {
 	m_equation.x.push_back(0);
@@ -124,7 +131,7 @@ T RK4<T>::Solve()
 }
 
 // Definitions for the forward Euler Methods
-template <class T>
+template <Number T>
 class ForwardEuler : public RungeKutta<T>
 {
 public:
@@ -133,7 +140,7 @@ public:
 
 };
 
-template <class T>
+template <Number T>
 ForwardEuler<T>::ForwardEuler(T step, T final_x, T IC)
 {
 	m_step_size = step;
@@ -141,7 +148,7 @@ ForwardEuler<T>::ForwardEuler(T step, T final_x, T IC)
 	m_initial_condition = IC;
 }
 
-template <class T>
+template <Number T>
 T ForwardEuler<T>::Solve()
 {
 	cout << "Solving..." << endl;
@@ -159,7 +166,7 @@ T ForwardEuler<T>::Solve()
 
 
 // Runge–Kutta–Fehlberg 
-template <class T>
+template <Number T>
 class RK45 : public RungeKutta<T>
 {
 public:
@@ -173,7 +180,7 @@ protected:
 	T m_error_tolerance;
 };
 
-template <class T>
+template <Number T>
 RK45<T>::RK45(T step, T final_x, T IC, T error_tolerance)
 {
 	m_step_size = step;
@@ -185,7 +192,7 @@ RK45<T>::RK45(T step, T final_x, T IC, T error_tolerance)
 };
 
 
-template <class T>
+template <Number T>
 T RK45<T>::Solve()
 {
 	T new_y = 0;
@@ -216,7 +223,7 @@ T RK45<T>::Solve()
 }
 
 // Runge Kutta Dormand Prince Definitions
-template< class T>
+template< Number T>
 class RKDP : public RungeKutta<T>
 {
 public:
@@ -227,7 +234,7 @@ protected:
 	T m_error_tolerance;
 };
 
-template <class T>
+template <Number T>
 RKDP<T>::RKDP(T step, T final_x, T IC, T error_tolerance)
 {
 	m_step_size = step;
@@ -242,7 +249,7 @@ RKDP<T>::RKDP(T step, T final_x, T IC, T error_tolerance)
 	m_equation.x.push_back(0);
 };
 
-template <class T>
+template <Number T>
 T RKDP<T>::Solve()
 {
 	T new_y;

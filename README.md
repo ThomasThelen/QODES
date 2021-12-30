@@ -15,6 +15,7 @@ To build the example, run the following from inside the `build/` directory,
 cmake ..
 cmake --build .
 ```
+
 # Quick Start
 To use this, download `QODES.h` and include it in your C++ project. A list of classes are provided below that represent the different solution algorithms.
 
